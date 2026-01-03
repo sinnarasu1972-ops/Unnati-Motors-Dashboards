@@ -7,15 +7,25 @@
 
   <style>
     :root{
-      --bg: #fff4e6;              /* light orange */
-      --panel: #0b1220;           /* sidebar dark */
-      --panel2: rgba(255,255,255,0.08);
-      --panel3: rgba(255,255,255,0.16);
+      /* Background (light orange) */
+      --bg: #fff4e6;
+
+      /* Open-RO style BLUE theme */
+      --primary: #5b6ee1;
+      --primary-dark: #4a5bdc;
+      --primary-light: #eef1ff;
+
+      /* Sidebar gradient */
+      --panel: linear-gradient(180deg, #5b6ee1 0%, #4a5bdc 100%);
+      --panel2: rgba(255,255,255,0.16);
+      --panel3: rgba(255,255,255,0.26);
+
       --text: #0b1220;
-      --muted: #7a5a3a;
+      --muted: #6b7280;
+
       --card: #ffffff;
-      --shadow: 0 10px 24px rgba(180, 90, 20, 0.12);
-      --shadow2: 0 18px 42px rgba(180, 90, 20, 0.18);
+      --shadow: 0 10px 24px rgba(91,110,225,0.22);
+      --shadow2: 0 18px 42px rgba(91,110,225,0.32);
       --radius: 18px;
     }
 
@@ -24,24 +34,26 @@
       margin:0;
       font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
       background:
-        radial-gradient(1200px 600px at 20% 0%, rgba(255,165,0,0.16), transparent 60%),
-        radial-gradient(1200px 600px at 90% 10%, rgba(255,200,120,0.18), transparent 55%),
+        radial-gradient(1200px 600px at 20% 0%, rgba(255,165,0,0.14), transparent 60%),
+        radial-gradient(1200px 600px at 90% 10%, rgba(255,200,120,0.16), transparent 55%),
         var(--bg);
       color: var(--text);
     }
 
     .layout{ display:flex; min-height:100vh; }
 
-    /* Sidebar */
+    /* =========================
+       SIDEBAR
+       ========================= */
     .sidebar{
       width: 280px;
       padding: 18px;
-      background: linear-gradient(180deg, #0b1220 0%, #070c16 100%);
+      background: var(--panel);
       color:#fff;
       position: sticky;
       top:0;
       height:100vh;
-      border-right: 1px solid rgba(255,255,255,0.06);
+      z-index: 50;
     }
 
     .brand-mini{
@@ -49,30 +61,36 @@
       align-items:center;
       gap:12px;
       padding: 10px 10px 16px 10px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.22);
       margin-bottom: 14px;
     }
     .brand-mini .dot{
       height:44px;
       width:44px;
       border-radius: 14px;
-      background: rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.18);
       display:flex;
       align-items:center;
       justify-content:center;
       font-weight:900;
       letter-spacing:0.5px;
+      overflow:hidden;
     }
-    .brand-mini .t1{ font-weight:800; font-size:14px; }
-    .brand-mini .t2{ font-size:12px; color: rgba(255,255,255,0.65); margin-top:2px; }
+    .brand-mini .dot img{
+      height:44px;
+      width:auto;
+      display:block;
+    }
+    .brand-mini .t1{ font-weight:900; font-size:14px; }
+    .brand-mini .t2{ font-size:12px; color: rgba(255,255,255,0.82); margin-top:2px; }
 
     .sidebar h3{
       margin: 14px 10px 10px 10px;
       font-size: 12px;
       letter-spacing: 1px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.60);
-      font-weight: 800;
+      color: rgba(255,255,255,0.85);
+      font-weight: 900;
     }
 
     .menu a{
@@ -82,32 +100,36 @@
       gap:10px;
       padding: 12px 12px;
       margin: 8px 6px;
-      background: var(--panel2);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.18);
       border-radius: 14px;
       color:#fff;
       text-decoration:none;
-      font-weight: 750;
+      font-weight: 850;
       transition: 0.2s ease;
     }
     .menu a:hover{
       transform: translateY(-1px);
-      background: var(--panel3);
-      border-color: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.28);
+      border-color: rgba(255,255,255,0.28);
     }
     .pill{
       font-size:11px;
-      padding: 4px 8px;
+      padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.10);
-      color: rgba(255,255,255,0.75);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.22);
+      color: rgba(255,255,255,0.95);
+      border: 1px solid rgba(255,255,255,0.18);
+      font-weight: 900;
     }
 
-    /* Content */
+    /* =========================
+       CONTENT
+       ========================= */
     .content{
       flex:1;
       padding: 22px;
+      min-width: 0;
     }
 
     .topbar{
@@ -126,7 +148,7 @@
     .logo-wrap{
       height:54px; width:54px;
       border-radius: 16px;
-      background: #0b1220;
+      background: var(--primary);
       display:flex;
       align-items:center;
       justify-content:center;
@@ -141,23 +163,13 @@
       letter-spacing:0.5px;
     }
 
-    .head{
-      text-align:center;
-      line-height:1.15;
-    }
-    .head .name{
-      font-size: 20px;
-      font-weight: 950;
-      letter-spacing: 0.2px;
-    }
-    .head .sub{
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 4px;
-      font-weight: 650;
-    }
+    .head{ text-align:center; line-height:1.15; }
+    .head .name{ font-size: 20px; font-weight: 950; letter-spacing: 0.2px; }
+    .head .sub{ font-size: 12px; color: var(--muted); margin-top: 4px; font-weight: 700; }
 
-    /* Cards */
+    /* =========================
+       CARDS
+       ========================= */
     .cards{
       margin-top: 18px;
       display:grid;
@@ -179,8 +191,8 @@
       position:absolute;
       inset:-2px;
       background:
-        radial-gradient(600px 240px at 20% 0%, rgba(255,165,0,0.22), transparent 55%),
-        radial-gradient(600px 240px at 80% 10%, rgba(255,200,120,0.22), transparent 60%);
+        radial-gradient(600px 240px at 20% 0%, rgba(91,110,225,0.25), transparent 55%),
+        radial-gradient(600px 240px at 80% 10%, rgba(120,135,255,0.25), transparent 60%);
       opacity:0.6;
       pointer-events:none;
     }
@@ -191,17 +203,8 @@
       box-shadow: var(--shadow2);
     }
 
-    .card h3{
-      margin: 0 0 6px 0;
-      font-size: 18px;
-      font-weight: 900;
-    }
-    .card p{
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 650;
-    }
+    .card h3{ margin: 0 0 6px 0; font-size: 18px; font-weight: 950; }
+    .card p{ margin: 0; color: var(--muted); font-size: 13px; font-weight: 700; }
 
     .actions{
       margin-top: 14px;
@@ -210,103 +213,224 @@
       flex-wrap: wrap;
     }
 
-    .btn{
+    .btn, .btn2{
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:8px;
       padding: 10px 14px;
       border-radius: 14px;
-      background: #0b1220;
-      color: #fff;
       text-decoration:none;
-      font-weight: 850;
+      font-weight: 900;
       border: 1px solid rgba(2,6,23,0.10);
       transition: 0.2s ease;
+      white-space: nowrap;
     }
-    .btn:hover{ opacity:0.93; transform: translateY(-1px); }
-
+    .btn{
+      background: var(--primary);
+      color: #fff;
+      border: none;
+    }
+    .btn:hover{
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
     .btn2{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding: 10px 14px;
-      border-radius: 14px;
       background: rgba(2,6,23,0.06);
       color: #0b1220;
-      text-decoration:none;
-      font-weight: 850;
-      border: 1px solid rgba(2,6,23,0.08);
-      transition: 0.2s ease;
+      border-color: rgba(2,6,23,0.08);
     }
-    .btn2:hover{ background: rgba(2,6,23,0.09); transform: translateY(-1px); }
+    .btn2:hover{
+      background: rgba(2,6,23,0.09);
+      transform: translateY(-1px);
+    }
 
-    /* Mobile */
+    /* =========================
+       MOBILE TOP BAR + DRAWER
+       ========================= */
+    .mobile-bar{
+      display:none;
+      position: sticky;
+      top:0;
+      z-index: 60;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(2,6,23,0.06);
+    }
+    .mobile-bar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .menu-btn{
+      appearance:none;
+      border: 1px solid rgba(2,6,23,0.12);
+      background: rgba(2,6,23,0.04);
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-weight: 900;
+      cursor:pointer;
+    }
+    .mobile-title{
+      font-weight: 950;
+      font-size: 14px;
+      line-height: 1.1;
+    }
+    .mobile-sub{
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+      font-weight: 700;
+    }
+
+    .overlay{
+      display:none;
+      position: fixed;
+      inset:0;
+      background: rgba(2,6,23,0.45);
+      z-index: 80;
+    }
+    .overlay.show{ display:block; }
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
     @media (max-width: 900px){
-      .sidebar{ display:none; }
+      .layout{ display:block; }
+      .mobile-bar{ display:block; }
+
       .content{ padding: 14px; }
-      .topbar{ justify-content:flex-start; }
+
+      .topbar{
+        justify-content:flex-start;
+        padding: 14px;
+      }
       .head{ text-align:left; }
+      .head .name{ font-size: 16px; }
+      .logo-wrap{ height:46px; width:46px; border-radius: 14px; }
+      .logo-wrap img{ height:46px; }
+
+      .cards{ grid-template-columns: 1fr; }
+
+      .actions{ flex-direction: column; }
+      .btn, .btn2{ width: 100%; }
+
+      .sidebar{
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        transform: translateX(-110%);
+        transition: 0.25s ease;
+        width: 82%;
+        max-width: 320px;
+        z-index: 90;
+        box-shadow: 0 16px 40px rgba(2,6,23,0.35);
+      }
+      .sidebar.open{ transform: translateX(0); }
     }
   </style>
 </head>
 
 <body>
-<div class="layout">
 
-  <aside class="sidebar">
-    <div class="brand-mini">
-      <div class="dot">UM</div>
+  <!-- Mobile header -->
+  <div class="mobile-bar">
+    <div class="mobile-bar-inner">
+      <button class="menu-btn" type="button" onclick="toggleMenu()">☰</button>
       <div>
-        <div class="t1">Unnati Motors</div>
-        <div class="t2">Dashboard Portal</div>
+        <div class="mobile-title">{{ company_name }}</div>
+        <div class="mobile-sub">Common Dashboard Portal</div>
       </div>
+      <div style="width:40px;"></div>
     </div>
+  </div>
 
-    <h3>Dashboards</h3>
+  <!-- Mobile overlay -->
+  <div id="overlay" class="overlay" onclick="closeMenu()"></div>
 
-    <div class="menu">
-      {% for d in dashboards %}
-        <a href="/go/{{ d.key }}">
-          <span>{{ d.name }}</span>
-          <span class="pill">Open</span>
-        </a>
-      {% endfor %}
-    </div>
-  </aside>
+  <div class="layout">
 
-  <main class="content">
-    <div class="topbar">
-      <div class="logo-wrap">
-        {% if logo_exists %}
-          <img src="/static/logo.png" alt="Logo">
-        {% else %}
-          <div class="logo-fallback">UM</div>
-        {% endif %}
-      </div>
-
-      <div class="head">
-        <div class="name">{{ company_name }}</div>
-        <div class="sub">Common Dashboard Portal</div>
-      </div>
-    </div>
-
-    <section class="cards">
-      {% for d in dashboards %}
-        <div class="card">
-          <h3>{{ d.name }}</h3>
-          <p>Open the dashboard using the buttons below.</p>
-
-          <div class="actions">
-            <a class="btn" href="/go/{{ d.key }}">Open Dashboard</a>
-            <a class="btn2" href="{{ d.url }}" target="_blank" rel="noopener">Open in New Tab</a>
-          </div>
+    <aside id="sidebar" class="sidebar">
+      <div class="brand-mini">
+        <div class="dot">
+          {% if logo_exists %}
+            <img src="/static/logo.png" alt="Logo">
+          {% else %}
+            UM
+          {% endif %}
         </div>
-      {% endfor %}
-    </section>
-  </main>
+        <div>
+          <div class="t1">Unnati Motors</div>
+          <div class="t2">Dashboard Portal</div>
+        </div>
+      </div>
 
-</div>
+      <h3>Dashboards</h3>
+
+      <div class="menu">
+        {% for d in dashboards %}
+          <a href="/go/{{ d.key }}" onclick="closeMenu()">
+            <span>{{ d.name }}</span>
+            <span class="pill">Open</span>
+          </a>
+        {% endfor %}
+      </div>
+    </aside>
+
+    <main class="content">
+
+      <div class="topbar">
+        <div class="logo-wrap">
+          {% if logo_exists %}
+            <img src="/static/logo.png" alt="Logo">
+          {% else %}
+            <div class="logo-fallback">UM</div>
+          {% endif %}
+        </div>
+
+        <div class="head">
+          <div class="name">{{ company_name }}</div>
+          <div class="sub">Common Dashboard Portal</div>
+        </div>
+      </div>
+
+      <section class="cards">
+        {% for d in dashboards %}
+          <div class="card">
+            <h3>{{ d.name }}</h3>
+            <p>Open the dashboard using the buttons below.</p>
+
+            <div class="actions">
+              <a class="btn" href="/go/{{ d.key }}">Open Dashboard</a>
+              <a class="btn2" href="{{ d.url }}" target="_blank" rel="noopener">Open in New Tab</a>
+            </div>
+          </div>
+        {% endfor %}
+      </section>
+
+    </main>
+
+  </div>
+
+  <script>
+    function toggleMenu(){
+      var sb = document.getElementById("sidebar");
+      var ov = document.getElementById("overlay");
+      sb.classList.toggle("open");
+      if(sb.classList.contains("open")) ov.classList.add("show");
+      else ov.classList.remove("show");
+    }
+
+    function closeMenu(){
+      var sb = document.getElementById("sidebar");
+      var ov = document.getElementById("overlay");
+      sb.classList.remove("open");
+      ov.classList.remove("show");
+    }
+  </script>
+
 </body>
 </html>
