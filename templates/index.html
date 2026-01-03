@@ -5,19 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>{{ company_name }}</title>
 
-  <style>
-    :root{
-      --bg: #f5f7fb;
-      --panel: #0b1220;
-      --panel2: rgba(255,255,255,0.06);
-      --panel3: rgba(255,255,255,0.12);
-      --text: #0b1220;
-      --muted: #64748b;
-      --card: #ffffff;
-      --shadow: 0 10px 24px rgba(2, 6, 23, 0.08);
-      --shadow2: 0 18px 42px rgba(2, 6, 23, 0.10);
-      --radius: 18px;
-    }
+ :root{
+  --bg: #fff4e6;              
+  --panel: #0b1220;           
+  --panel2: rgba(255,255,255,0.08);
+  --panel3: rgba(255,255,255,0.16);
+  --text: #0b1220;
+  --muted: #7a5a3a;
+  --card: #ffffff;
+  --shadow: 0 10px 24px rgba(180, 90, 20, 0.12);
+  --shadow2: 0 18px 42px rgba(180, 90, 20, 0.18);
+  --radius: 18px;
+}
 
     *{ box-sizing:border-box; }
     body{
@@ -176,8 +175,11 @@
       content:"";
       position:absolute;
       inset: -2px;
-      background: radial-gradient(600px 240px at 20% 0%, rgba(99,102,241,0.18), transparent 55%),
-                  radial-gradient(600px 240px at 80% 10%, rgba(14,165,233,0.16), transparent 60%);
+      .card:before{
+     background: radial-gradient(600px 240px at 20% 0%, rgba(255,165,0,0.25), transparent 55%),
+                 radial-gradient(600px 240px at 80% 10%, rgba(255,200,120,0.25), transparent 60%);
+    }
+
       opacity: 0.55;
       pointer-events:none;
     }
