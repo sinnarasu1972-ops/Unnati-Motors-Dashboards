@@ -1,80 +1,250 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>{{ company_name }}</title>
 
   <style>
-    body { margin:0; font-family:Segoe UI, Arial; background:#f4f6fb; }
-    .layout { display:flex; min-height:100vh; }
-
-    .sidebar {
-      width:260px;
-      background:#0f172a;
-      color:white;
-      padding:18px;
+    :root{
+      --bg: #f5f7fb;
+      --panel: #0b1220;
+      --panel2: rgba(255,255,255,0.06);
+      --panel3: rgba(255,255,255,0.12);
+      --text: #0b1220;
+      --muted: #64748b;
+      --card: #ffffff;
+      --shadow: 0 10px 24px rgba(2, 6, 23, 0.08);
+      --shadow2: 0 18px 42px rgba(2, 6, 23, 0.10);
+      --radius: 18px;
     }
-    .sidebar h3 { margin-bottom:14px; font-size:16px; }
-    .menu a {
-      display:block;
-      padding:10px;
-      margin-bottom:8px;
-      background:rgba(255,255,255,0.1);
-      border-radius:10px;
-      color:white;
-      text-decoration:none;
-      font-weight:600;
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 20% 0%, rgba(99,102,241,0.08), transparent 60%),
+                  radial-gradient(1200px 600px at 90% 10%, rgba(14,165,233,0.08), transparent 55%),
+                  var(--bg);
+      color: var(--text);
     }
-    .menu a:hover { background:rgba(255,255,255,0.2); }
 
-    .content { flex:1; padding:20px; }
+    .layout{ display:flex; min-height:100vh; }
 
-    .header {
-      background:white;
-      border-radius:16px;
-      padding:16px;
+    /* Sidebar */
+    .sidebar{
+      width: 280px;
+      padding: 18px;
+      background: linear-gradient(180deg, #0b1220 0%, #070c16 100%);
+      color:#fff;
+      position: sticky;
+      top:0;
+      height:100vh;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .brand-mini{
       display:flex;
-      justify-content:center;
-      box-shadow:0 6px 16px rgba(0,0,0,0.1);
+      align-items:center;
+      gap:12px;
+      padding: 10px 10px 16px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 14px;
     }
-    .brand { display:flex; align-items:center; gap:12px; }
-
-    .logo-box {
-      height:52px; width:52px;
-      background:#0f172a;
-      color:white;
+    .brand-mini .dot{
+      height:44px;
+      width:44px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.08);
       display:flex;
       align-items:center;
       justify-content:center;
-      border-radius:14px;
       font-weight:900;
+      letter-spacing:0.5px;
     }
-    .brand img { height:52px; }
+    .brand-mini .t1{ font-weight:800; font-size:14px; }
+    .brand-mini .t2{ font-size:12px; color: rgba(255,255,255,0.65); margin-top:2px; }
 
-    .title { font-size:20px; font-weight:900; }
-    .sub { font-size:12px; color:#64748b; }
+    .sidebar h3{
+      margin: 14px 10px 10px 10px;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.60);
+      font-weight: 800;
+    }
 
-    .cards {
-      margin-top:18px;
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    .menu a{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding: 12px 12px;
+      margin: 8px 6px;
+      background: var(--panel2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      color:#fff;
+      text-decoration:none;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+    .menu a:hover{
+      transform: translateY(-1px);
+      background: var(--panel3);
+      border-color: rgba(255,255,255,0.12);
+    }
+    .pill{
+      font-size:11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.75);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* Content */
+    .content{
+      flex:1;
+      padding: 22px;
+    }
+
+    .topbar{
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(2,6,23,0.06);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       gap:14px;
     }
-    .card {
-      background:white;
-      padding:16px;
-      border-radius:16px;
-      box-shadow:0 6px 16px rgba(0,0,0,0.1);
+
+    .logo-wrap{
+      height:54px; width:54px;
+      border-radius: 16px;
+      background: #0b1220;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      box-shadow: 0 10px 18px rgba(2,6,23,0.20);
     }
-    .btn {
-      display:inline-block;
-      padding:10px 14px;
-      background:#0f172a;
-      color:white;
-      border-radius:12px;
+    .logo-wrap img{ height:54px; width:auto; display:block; }
+    .logo-fallback{
+      color:#fff;
+      font-weight:900;
+      letter-spacing:0.5px;
+    }
+
+    .head{
+      text-align:center;
+      line-height:1.15;
+    }
+    .head .name{
+      font-size: 20px;
+      font-weight: 950;
+      letter-spacing: 0.2px;
+    }
+    .head .sub{
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    /* Cards */
+    .cards{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+    .card{
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(2,6,23,0.06);
+      padding: 18px;
+      transition: 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      inset: -2px;
+      background: radial-gradient(600px 240px at 20% 0%, rgba(99,102,241,0.18), transparent 55%),
+                  radial-gradient(600px 240px at 80% 10%, rgba(14,165,233,0.16), transparent 60%);
+      opacity: 0.55;
+      pointer-events:none;
+    }
+    .card > *{ position:relative; z-index:1; }
+
+    .card:hover{
+      transform: translateY(-2px);
+      box-shadow: var(--shadow2);
+    }
+
+    .card h3{
+      margin: 0 0 6px 0;
+      font-size: 18px;
+      font-weight: 900;
+    }
+    .card p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .actions{
+      margin-top: 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap: wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: #0b1220;
+      color: #fff;
       text-decoration:none;
-      font-weight:700;
-      margin-top:10px;
+      font-weight: 800;
+      border: 1px solid rgba(2,6,23,0.10);
+      transition: 0.2s ease;
+    }
+    .btn:hover{ opacity:0.93; transform: translateY(-1px); }
+
+    .btn2{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: rgba(2,6,23,0.06);
+      color: #0b1220;
+      text-decoration:none;
+      font-weight: 800;
+      border: 1px solid rgba(2,6,23,0.08);
+      transition: 0.2s ease;
+    }
+    .btn2:hover{ background: rgba(2,6,23,0.09); transform: translateY(-1px); }
+
+    /* Mobile */
+    @media (max-width: 900px){
+      .sidebar{ display:none; }
+      .content{ padding: 14px; }
+      .topbar{ justify-content:flex-start; }
+      .head{ text-align:left; }
     }
   </style>
 </head>
@@ -82,39 +252,56 @@
 <body>
 <div class="layout">
 
-  <div class="sidebar">
+  <aside class="sidebar">
+    <div class="brand-mini">
+      <div class="dot">UM</div>
+      <div>
+        <div class="t1">Unnati Motors</div>
+        <div class="t2">Dashboard Portal</div>
+      </div>
+    </div>
+
     <h3>Dashboards</h3>
+
     <div class="menu">
       {% for d in dashboards %}
-        <a href="/go/{{ d.key }}">{{ d.name }}</a>
+        <a href="/go/{{ d.key }}">
+          <span>{{ d.name }}</span>
+          <span class="pill">Open</span>
+        </a>
       {% endfor %}
     </div>
-  </div>
+  </aside>
 
-  <div class="content">
-    <div class="header">
-      <div class="brand">
+  <main class="content">
+    <div class="topbar">
+      <div class="logo-wrap">
         {% if logo_exists %}
-          <img src="/static/logo.png">
+          <img src="/static/logo.png" alt="Logo">
         {% else %}
-          <div class="logo-box">UM</div>
+          <div class="logo-fallback">UM</div>
         {% endif %}
-        <div>
-          <div class="title">{{ company_name }}</div>
-          <div class="sub">Common Dashboard Portal</div>
-        </div>
+      </div>
+      <div class="head">
+        <div class="name">{{ company_name }}</div>
+        <div class="sub">Common Dashboard Portal</div>
       </div>
     </div>
 
-    <div class="cards">
+    <section class="cards">
       {% for d in dashboards %}
-      <div class="card">
-        <h3>{{ d.name }}</h3>
-        <a class="btn" href="/go/{{ d.key }}">Open</a>
-      </div>
+        <div class="card">
+          <h3>{{ d.name }}</h3>
+          <p>Open the dashboard using the button below.</p>
+
+          <div class="actions">
+            <a class="btn" href="/go/{{ d.key }}">Open Dashboard</a>
+            <a class="btn2" href="{{ d.url }}" target="_blank">Open in New Tab</a>
+          </div>
+        </div>
       {% endfor %}
-    </div>
-  </div>
+    </section>
+  </main>
 
 </div>
 </body>
