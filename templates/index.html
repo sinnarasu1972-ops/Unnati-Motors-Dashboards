@@ -5,26 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>{{ company_name }}</title>
 
- :root{
-  --bg: #fff4e6;              
-  --panel: #0b1220;           
-  --panel2: rgba(255,255,255,0.08);
-  --panel3: rgba(255,255,255,0.16);
-  --text: #0b1220;
-  --muted: #7a5a3a;
-  --card: #ffffff;
-  --shadow: 0 10px 24px rgba(180, 90, 20, 0.12);
-  --shadow2: 0 18px 42px rgba(180, 90, 20, 0.18);
-  --radius: 18px;
-}
+  <style>
+    :root{
+      --bg: #fff4e6;              /* light orange */
+      --panel: #0b1220;           /* sidebar dark */
+      --panel2: rgba(255,255,255,0.08);
+      --panel3: rgba(255,255,255,0.16);
+      --text: #0b1220;
+      --muted: #7a5a3a;
+      --card: #ffffff;
+      --shadow: 0 10px 24px rgba(180, 90, 20, 0.12);
+      --shadow2: 0 18px 42px rgba(180, 90, 20, 0.18);
+      --radius: 18px;
+    }
 
     *{ box-sizing:border-box; }
     body{
       margin:0;
       font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 20% 0%, rgba(99,102,241,0.08), transparent 60%),
-                  radial-gradient(1200px 600px at 90% 10%, rgba(14,165,233,0.08), transparent 55%),
-                  var(--bg);
+      background:
+        radial-gradient(1200px 600px at 20% 0%, rgba(255,165,0,0.16), transparent 60%),
+        radial-gradient(1200px 600px at 90% 10%, rgba(255,200,120,0.18), transparent 55%),
+        var(--bg);
       color: var(--text);
     }
 
@@ -85,7 +87,7 @@
       border-radius: 14px;
       color:#fff;
       text-decoration:none;
-      font-weight: 700;
+      font-weight: 750;
       transition: 0.2s ease;
     }
     .menu a:hover{
@@ -109,7 +111,7 @@
     }
 
     .topbar{
-      background: rgba(255,255,255,0.75);
+      background: rgba(255,255,255,0.78);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(2,6,23,0.06);
       border-radius: var(--radius);
@@ -130,6 +132,7 @@
       justify-content:center;
       overflow:hidden;
       box-shadow: 0 10px 18px rgba(2,6,23,0.20);
+      flex: 0 0 auto;
     }
     .logo-wrap img{ height:54px; width:auto; display:block; }
     .logo-fallback{
@@ -151,7 +154,7 @@
       font-size: 12px;
       color: var(--muted);
       margin-top: 4px;
-      font-weight: 600;
+      font-weight: 650;
     }
 
     /* Cards */
@@ -174,13 +177,11 @@
     .card:before{
       content:"";
       position:absolute;
-      inset: -2px;
-      .card:before{
-     background: radial-gradient(600px 240px at 20% 0%, rgba(255,165,0,0.25), transparent 55%),
-                 radial-gradient(600px 240px at 80% 10%, rgba(255,200,120,0.25), transparent 60%);
-    }
-
-      opacity: 0.55;
+      inset:-2px;
+      background:
+        radial-gradient(600px 240px at 20% 0%, rgba(255,165,0,0.22), transparent 55%),
+        radial-gradient(600px 240px at 80% 10%, rgba(255,200,120,0.22), transparent 60%);
+      opacity:0.6;
       pointer-events:none;
     }
     .card > *{ position:relative; z-index:1; }
@@ -199,7 +200,7 @@
       margin: 0;
       color: var(--muted);
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 650;
     }
 
     .actions{
@@ -219,7 +220,7 @@
       background: #0b1220;
       color: #fff;
       text-decoration:none;
-      font-weight: 800;
+      font-weight: 850;
       border: 1px solid rgba(2,6,23,0.10);
       transition: 0.2s ease;
     }
@@ -235,7 +236,7 @@
       background: rgba(2,6,23,0.06);
       color: #0b1220;
       text-decoration:none;
-      font-weight: 800;
+      font-weight: 850;
       border: 1px solid rgba(2,6,23,0.08);
       transition: 0.2s ease;
     }
@@ -284,6 +285,7 @@
           <div class="logo-fallback">UM</div>
         {% endif %}
       </div>
+
       <div class="head">
         <div class="name">{{ company_name }}</div>
         <div class="sub">Common Dashboard Portal</div>
@@ -294,11 +296,11 @@
       {% for d in dashboards %}
         <div class="card">
           <h3>{{ d.name }}</h3>
-          <p>Open the dashboard using the button below.</p>
+          <p>Open the dashboard using the buttons below.</p>
 
           <div class="actions">
             <a class="btn" href="/go/{{ d.key }}">Open Dashboard</a>
-            <a class="btn2" href="{{ d.url }}" target="_blank">Open in New Tab</a>
+            <a class="btn2" href="{{ d.url }}" target="_blank" rel="noopener">Open in New Tab</a>
           </div>
         </div>
       {% endfor %}
