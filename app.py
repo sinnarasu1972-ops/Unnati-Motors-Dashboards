@@ -31,8 +31,12 @@ DASHBOARDS = [
         "name": "Maxi Care",
         "url": "https://maxi-care.onrender.com"
     },
+    {
+        "key": "kundali",
+        "name": "Stock Kundali",
+        "url": "https://stock-kundali.onrender.com"
+    },
 ]
-
 # =================================================
 # APP SETUP
 # =================================================
