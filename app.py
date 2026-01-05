@@ -36,6 +36,11 @@ DASHBOARDS = [
         "name": "Stock Kundali",
         "url": "https://stock-kundali.onrender.com"
     },
+    {
+        "key": "Warranty",
+        "name": "Warranty Analysis",
+        "url": "https://warranty-dashboard.onrender.com"
+    },
 ]
 # =================================================
 # APP SETUP
