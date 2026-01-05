@@ -41,6 +41,11 @@ DASHBOARDS = [
         "name": "Warranty Analysis",
         "url": "https://warranty-dashboard.onrender.com"
     },
+    {
+        "key": "Accessories",
+        "name": "Accessories Dashboard",
+        "url": "https://accessories-1pyp.onrender.com"
+    },
 ]
 # =================================================
 # APP SETUP
