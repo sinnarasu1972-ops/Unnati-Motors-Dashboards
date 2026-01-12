@@ -46,6 +46,11 @@ DASHBOARDS = [
         "name": "Accessories Dashboard",
         "url": "https://accessories-1pyp.onrender.com"
     },
+    {
+        "key": "Material In Transit",
+        "name": "Material In Transit Dashboard",
+        "url": "https://material-tntransit-dashboard.onrender.com"
+    },
 ]
 # =================================================
 # APP SETUP
