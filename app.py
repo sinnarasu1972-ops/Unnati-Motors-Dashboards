@@ -51,6 +51,11 @@ DASHBOARDS = [
         "name": "Material In Transit Dashboard",
         "url": "https://material-tntransit-dashboard.onrender.com"
     },
+    {
+        "key": "Material In Transit",
+        "name": "Material In Transit Dashboard",
+        "url": "https://open-ro.onrender.com"
+    },
 ]
 # =================================================
 # APP SETUP
